@@ -1,0 +1,11 @@
+variable
+types
+comments
+string
+integer
+array
+object
+function
+class
+error
+time

@@ -1,0 +1,19 @@
+folders
+Controllers -> package Controllers (from gin)
+Routes -> package routes (from gin)
+Config
+
+mainfile
+main.go
+
+go mod init scrach_setup
+
+package
+go get github.com/gin-gonic/gin (gin framwork)
+go get -u gorm.io/gorm (orm)
+
+gorm.io/driver/mysql
+
+package need to create based on folders
+
+https://github.com/Keithwachira/food-delivery-go-tutorial-series/blob/handling-migrations-in-gorm/main.go
