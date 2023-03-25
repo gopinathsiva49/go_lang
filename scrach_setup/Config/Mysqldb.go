@@ -2,6 +2,7 @@ package Config
 
 import (
 	"fmt"
+	"os"
 
 	"gorm.io/driver/mysql"
 
@@ -20,11 +21,11 @@ type DBConfig struct {
 
 func BuildDBConfig() *DBConfig {
 	dbConfig := DBConfig{
-		Host:     "localhost",
+		Host:     os.Getenv("HOST"),
 		Port:     3306,
-		User:     "root",
-		DBName:   "todo",
-		Password: "",
+		User:     os.Getenv("USER"),
+		DBName:   os.Getenv("DBNAME"),
+		Password: os.Getenv("PASSWORD"),
 	}
 	return &dbConfig
 }
