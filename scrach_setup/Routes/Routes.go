@@ -15,10 +15,10 @@ func SetupRouter() *gin.Engine {
 	{
 		version1.GET("/session", V1.GetSession)
 
-		version1.GET("/users", Controllers.Auth, V1.ListUsers)
-		version1.POST("/users", Controllers.Auth, V1.CreateUsers)
-		version1.PUT("/users/:id", Controllers.Auth, V1.UpdateUsers)
-		version1.DELETE("/users/:id", Controllers.Auth, V1.DeleteUsers)
+		version1.GET("/users", V1.Auth, V1.ListUsers)
+		version1.POST("/users", V1.Auth, V1.CreateUsers)
+		version1.PUT("/users/:id", V1.Auth, V1.UpdateUsers)
+		version1.DELETE("/users/:id", V1.Auth, V1.DeleteUsers)
 
 	}
 	return r

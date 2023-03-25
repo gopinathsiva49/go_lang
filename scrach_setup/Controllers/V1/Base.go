@@ -1,6 +1,7 @@
-package Controllers
+package V1
 
 import (
+	"fmt"
 	"scrach_setup/Config"
 	"scrach_setup/Models"
 
@@ -14,9 +15,9 @@ import (
 // If the authorization fails (ex: the password does not match), call Abort to ensure the remaining handlers for this request are not called.
 // ref - https://pkg.go.dev/github.com/gin-gonic/gin#Context.Abort
 
-var session Models.Session
-
 func Auth(c *gin.Context) {
+	var session Models.Session
+
 	tokenString := c.GetHeader("Authorization")
 	if tokenString == "" {
 		c.JSON(400, gin.H{"error": "Missing header 'Authorization'"})
@@ -25,6 +26,7 @@ func Auth(c *gin.Context) {
 	}
 
 	if err := Config.DB.Where("auth_token = ?", tokenString).First(&session).Error; err != nil {
+		fmt.Println(err)
 		c.JSON(404, gin.H{"error": "No active session found"})
 		c.Abort()
 		return

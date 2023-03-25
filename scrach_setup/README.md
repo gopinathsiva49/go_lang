@@ -1,6 +1,7 @@
 Things you may want to cover:
 
 - go mod init scrach_setup
+- go get .
 
 PACKAGES
 
