@@ -14,4 +14,5 @@ type Alive struct {
 func GetAlive(c *gin.Context) {
 	a := Alive{CurrentTime: time.Now()}
 	c.JSON(http.StatusOK, a)
+	// c.Abort() // api end
 }

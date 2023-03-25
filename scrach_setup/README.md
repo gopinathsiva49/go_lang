@@ -7,10 +7,10 @@ PACKAGES
 - go get github.com/gin-gonic/gin (gin framwork)
 - go get -u gorm.io/gorm (orm)
 - go get gorm.io/driver/mysql
+- go get -u github.com/dgrijalva/jwt-go
 
-ENV
+ENV (update the enviroment value in .env)
 
-- export HOST=localhost
-- export USER=root
-- export DBNAME=todo
-- export PASSWORD=
+RUN
+
+- go run .

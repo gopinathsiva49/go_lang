@@ -21,11 +21,11 @@ type DBConfig struct {
 
 func BuildDBConfig() *DBConfig {
 	dbConfig := DBConfig{
-		Host:     os.Getenv("HOST"),
+		Host:     os.Getenv("DBHOST"),
 		Port:     3306,
-		User:     os.Getenv("USER"),
+		User:     os.Getenv("DBUSER"),
 		DBName:   os.Getenv("DBNAME"),
-		Password: os.Getenv("PASSWORD"),
+		Password: os.Getenv("DBPASSWORD"),
 	}
 	return &dbConfig
 }

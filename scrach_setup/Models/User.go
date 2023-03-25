@@ -3,7 +3,6 @@ package Models
 import "time"
 
 type User struct {
-	//this represents the customer
 	ID        int       `json:"id,primary_key"` //this will be the primary key field
 	FirstName string    `json:"first_name" gorm:"index"`
 	LastName  string    `json:"last_name" gorm:"index"`
