@@ -14,11 +14,12 @@ func SetupRouter() *gin.Engine {
 	// .Use(Controllers.GetAlive)
 	{
 		version1.GET("/session", V1.GetSession)
-
-		version1.GET("/users", V1.Auth, V1.ListUsers)
-		version1.POST("/users", V1.Auth, V1.CreateUsers)
-		version1.PUT("/users/:id", V1.Auth, V1.UpdateUsers)
-		version1.DELETE("/users/:id", V1.Auth, V1.DeleteUsers)
+		version1.POST("/register", V1.Auth, V1.Register)
+		version1.POST("/login", V1.Auth, V1.Login)
+		version1.GET("/users", V1.Auth, V1.AccountAuth, V1.ListUsers)
+		version1.POST("/users", V1.Auth, V1.AccountAuth, V1.CreateUsers)
+		version1.PUT("/users/:id", V1.Auth, V1.AccountAuth, V1.UpdateUsers)
+		version1.DELETE("/users/:id", V1.Auth, V1.AccountAuth, V1.DeleteUsers)
 
 	}
 	return r

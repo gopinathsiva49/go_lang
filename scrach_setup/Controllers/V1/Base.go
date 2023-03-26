@@ -1,9 +1,9 @@
 package V1
 
 import (
-	"fmt"
 	"scrach_setup/Config"
 	"scrach_setup/Models"
+	"time"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -14,10 +14,10 @@ import (
 // Let's say you have an authorization middleware that validates that the current request is authorized.
 // If the authorization fails (ex: the password does not match), call Abort to ensure the remaining handlers for this request are not called.
 // ref - https://pkg.go.dev/github.com/gin-gonic/gin#Context.Abort
+var session Models.Session
 
 func Auth(c *gin.Context) {
-	var session Models.Session
-
+	session = Models.Session{} // refresh
 	tokenString := c.GetHeader("Authorization")
 	if tokenString == "" {
 		c.JSON(400, gin.H{"error": "Missing header 'Authorization'"})
@@ -26,7 +26,6 @@ func Auth(c *gin.Context) {
 	}
 
 	if err := Config.DB.Where("auth_token = ?", tokenString).First(&session).Error; err != nil {
-		fmt.Println(err)
 		c.JSON(404, gin.H{"error": "No active session found"})
 		c.Abort()
 		return
@@ -54,4 +53,22 @@ func Auth(c *gin.Context) {
 		}
 	}
 	c.Next() // allow next function
+}
+
+type CompareTime struct {
+	CurrentTime time.Time
+}
+
+func AccountAuth(c *gin.Context) {
+	if session.UserId == 0 {
+		c.JSON(401, gin.H{"error": "unauthorized"})
+		c.Abort()
+		return
+	}
+
+	if session.ExpiresAt.Unix() < time.Now().Unix() {
+		c.JSON(403, gin.H{"error": "Token expired"})
+		c.Abort()
+		return
+	}
 }
