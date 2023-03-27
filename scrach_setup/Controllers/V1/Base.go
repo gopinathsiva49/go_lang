@@ -14,7 +14,8 @@ import (
 // Let's say you have an authorization middleware that validates that the current request is authorized.
 // If the authorization fails (ex: the password does not match), call Abort to ensure the remaining handlers for this request are not called.
 // ref - https://pkg.go.dev/github.com/gin-gonic/gin#Context.Abort
-var session Models.Session
+
+var session Models.Session // don't use * because of pointer refer same memory
 
 func Auth(c *gin.Context) {
 	session = Models.Session{} // refresh

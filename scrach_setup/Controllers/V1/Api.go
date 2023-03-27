@@ -25,7 +25,8 @@ type LoginInput struct {
 }
 
 func GetSession(c *gin.Context) {
-	session, err := Models.NewSession()
+	session := &Models.Session{}
+	err := session.NewSession() // iterface function (class intance method) using pointer to get value
 	if err != nil {
 		c.JSON(422, err)
 	} else {

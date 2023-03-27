@@ -9,11 +9,18 @@ import (
 
 func ListUsers(c *gin.Context) {
 	var user []Models.User
-	if err := Config.DB.Find(&user).Error; err != nil {
-		c.AbortWithStatus(404)
+	err := user.UserList() // iterface function (class intance method) using pointer to get value
+	if err != nil {
+		c.JSON(404, err)
 	} else {
 		c.JSON(200, user)
 	}
+
+	// if err := Config.DB.Find(&user).Error; err != nil {
+	// 	c.AbortWithStatus(404)
+	// } else {
+	// 	c.JSON(200, user)
+	// }
 }
 
 func CreateUsers(c *gin.Context) {

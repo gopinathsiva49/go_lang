@@ -22,8 +22,7 @@ type Session struct {
 	UpdatedAt  time.Time `json:"updated_at"`
 }
 
-func NewSession() (Error Session, err error) {
-	se := Session{}
+func (se *Session) NewSession() (err error) { // iterface function with pointer (instance method)
 	se.Salt = SecureRandom(40)
 	se.SessionKey = SecureRandom(60)
 	claims := jwt.MapClaims{
@@ -32,18 +31,18 @@ func NewSession() (Error Session, err error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err := token.SignedString([]byte(se.Salt))
 	if err != nil {
-		return se, err
+		return err
 	}
 	se.AuthToken = tokenString
 	se.ExpiresAt = time.Now().Add(24 * time.Hour)
 
 	if err = Config.DB.Save(&se).Error; err != nil {
-		return se, err
+		return err
 	}
-	return se, err
+	return err
 }
 
-func SecureRandom(val int) string {
+func SecureRandom(val int) string { // common fuction like class function (class method)
 	// Generate 40 random bytes
 	randomBytes := make([]byte, val)
 	_, err := rand.Read(randomBytes)
