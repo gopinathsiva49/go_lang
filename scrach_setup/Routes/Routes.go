@@ -21,6 +21,8 @@ func SetupRouter() *gin.Engine {
 		version1.PUT("/users/:id", V1.Auth, V1.AccountAuth, V1.UpdateUsers)
 		version1.DELETE("/users/:id", V1.Auth, V1.AccountAuth, V1.DeleteUsers)
 
+		version1.POST("/b_users", V1.Auth, V1.AccountAuth, V1.CreateUsersBackground)
+
 	}
 	return r
 }

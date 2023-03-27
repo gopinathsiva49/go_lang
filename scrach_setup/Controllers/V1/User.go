@@ -49,3 +49,10 @@ func DeleteUsers(c *gin.Context) {
 		c.JSON(200, gin.H{"message": "deleted successfully"})
 	}
 }
+
+func CreateUsersBackground(c *gin.Context) {
+	var user Models.User
+	c.BindJSON(&user)
+	go Config.DB.Create(&user)
+	c.JSON(200, gin.H{"message": "creation initiated successfully"})
+}
