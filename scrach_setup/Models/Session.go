@@ -11,15 +11,19 @@ import (
 )
 
 type Session struct {
-	ID         int       `json:"id,primary_key"`
+	ID         int       `json:"id"`
 	UUID       string    `json:"uuid"`
-	UserId     int       `json:"user_id" gorm:"index"`
-	Salt       string    `json:"salt" gorm:"index"`
-	SessionKey string    `json:"session_key" gorm:"index"`
-	AuthToken  string    `json:"auth_token" gorm:"size:65536"` // INDEX IS PENDING
+	UserId     int       `json:"user_id"`
+	Salt       string    `json:"salt"`
+	SessionKey string    `json:"session_key"`
+	AuthToken  string    `json:"auth_token"` // INDEX IS PENDING
 	ExpiresAt  time.Time `json:"expires_at"`
 	CreatedAt  time.Time `json:"created_at"`
 	UpdatedAt  time.Time `json:"updated_at"`
+}
+
+func (se *Session) TableName() string {
+	return "sessions"
 }
 
 func (se *Session) NewSession() (err error) { // iterface function with pointer (instance method)

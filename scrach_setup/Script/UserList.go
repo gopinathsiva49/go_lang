@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"scrach_setup/Config"
-	"scrach_setup/Migrations"
 	"scrach_setup/Models"
 
 	"github.com/joho/godotenv"
@@ -29,9 +28,6 @@ func init() {
 
 	////initialize the database
 	Config.InitDB()
-	///add this line to main.go to initialize the migration
-	Migrations.Migrate()
-
 }
 func main() {
 	userlist()
